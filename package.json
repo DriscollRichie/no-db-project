@@ -1,0 +1,20 @@
+{
+  "name": "no-db-project",
+  "version": "1.0.0",
+  "description": "My NoDB project for DevMountain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DriscollRichie/no-db-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DriscollRichie/no-db-project/issues"
+  },
+  "homepage": "https://github.com/DriscollRichie/no-db-project#readme"
+}
