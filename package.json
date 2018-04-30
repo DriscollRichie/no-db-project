@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/DriscollRichie/no-db-project/issues"
   },
-  "homepage": "https://github.com/DriscollRichie/no-db-project#readme"
+  "homepage": "https://github.com/DriscollRichie/no-db-project#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
+  },
+  "proxy": "http://localhost:3001"
 }
