@@ -1,13 +1,11 @@
-import React from 'react'
-import {HashRouter, Route, Switch} from 'react-router-dom'
-import MovieResults from './Components/MovieResults/MovieResults'
-import userList from './Components/userList/userList'
+// import React from 'react'
+// import {Route, Switch} from 'react-router-dom'
+// import MovieResults from './Components/MovieResults/MovieResults'
+// import UserList from './Components/UserList/UserList'
 
-export default(
-  <HashRouter>
-      <Switch>
-        <Route exact path='/' component={MovieResults}/>
-        <Route path='/user-list' component={userList}/>
-      </Switch>
-  </HashRouter>
-)
+// export default(
+//       <Switch>
+//         <Route exact path='/' component={MovieResults}/>
+//         <Route path='/user-list' component={UserList}/>
+//       </Switch>
+// )

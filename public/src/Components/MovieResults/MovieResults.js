@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Movie from "../Movie/Movie";
-import Search from '../Search/Search'
+import Search from "../Search/Search";
+import UserList from "../UserList/UserList";
 
 export default class MovieResults extends Component {
   constructor() {
@@ -26,12 +27,14 @@ export default class MovieResults extends Component {
             "https://ia.media-imdb.com/images/M/MV5BMTQ5ODQwNzIxNV5BMl5BanBnXkFtZTYwNzAyMDE3._V1_UX182_CR0,0,182,268_AL_.jpg"
         }
       ],
-      userInput: '',
-      filteredMovies: []
+      userInput: "",
+      filteredMovies: [],
+      userList: []
     };
 
-    this.updateUserInput = this.updateUserInput.bind(this)
-    this.searchMovies = this.searchMovies.bind(this)
+    this.updateUserInput = this.updateUserInput.bind(this);
+    this.searchMovies = this.searchMovies.bind(this);
+    this.addToList = this.addToList.bind(this)
   }
 
   updateUserInput(e) {
@@ -45,15 +48,24 @@ export default class MovieResults extends Component {
     this.setState({ filteredMovies: movieSearch, userInput: "" });
   }
 
+  addToList(title, year, cover) {
+    this.setState({userList: [...this.state.userList, {title, year, cover}]})
+  }
+
   render() {
     let moviesToDisplay = this.state.filteredMovies.map((elem, i) => {
-        return <Movie key={i} data={elem} />;
-      });
-      
+      return (<Movie key={i} data={elem} addToListFn={this.addToList}/>)
+    });
+
     return (
       <div>
-        <Search updateUserInputFn={this.updateUserInput} userInput={this.state.userInput} movies={this.state.movies} searchMoviesFn={this.searchMovies}/>
+        <Search
+          updateUserInputFn={this.updateUserInput}
+          userInput={this.state.userInput}
+          searchMoviesFn={this.searchMovies}
+        />
         {moviesToDisplay}
+        <UserList userList={this.state.userList}/>
       </div>
     );
   }

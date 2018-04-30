@@ -1,17 +1,18 @@
-import React, { Component } from "react";
+import React from 'react'
 
-export default class userList extends Component {
-  constructor() {
-    super()
-    this.state = {
-      userList: []
-    }
-  }
-  render() {
-    return (
-      <div>
-        <h1>I am userList</h1>
+export default function UserList(props) {
+  let movie = props.userList.map((elem, i) => {
+    return(
+      <div key={i}>
+        <span>{elem.title}</span>
+        <span>{elem.year}</span>
+        <img src={elem.cover} alt='movie cover'/>
       </div>
-    );
-  }
+    )
+  })
+  return(
+    <div>
+      {movie}
+    </div>
+  )
 }
