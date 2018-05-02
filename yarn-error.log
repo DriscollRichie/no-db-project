@@ -36,7 +36,8 @@ npm manifest:
     "dependencies": {
       "body-parser": "^1.18.2",
       "express": "^4.16.3"
-    }
+    },
+    "proxy": "http://localhost:3001"
   }
 
 yarn manifest: 

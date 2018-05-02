@@ -29,6 +29,7 @@ let movies = [
 ];
 
 let userList = []
+let movieId = 0;
 
 module.exports = {
   getMovies: (req, res) => {
@@ -38,13 +39,14 @@ module.exports = {
   postMovie: (req, res) => {
     const {title, year, cover} = req.body;
     const movie = {
-      id: movies[movies.length -1].id +1,
+      id: movieId,
       title,
       year,
       cover
     };
     userList.push(movie)
-    res.status(200).send(movies)
+    movieId++
+    res.status(200).send(userList)
   },
 
   getUserList: (req, res) => {
@@ -62,16 +64,19 @@ module.exports = {
 
   updateMovie: (req, res) => {
     let movieIndex = null;
+    console.log(req.params)
     userList.forEach((elem, i) => {
-      if (elem.id === Number(req.params.id)) {
+      console.log('elem', elem)
+      if (elem.id == Number(req.params.id)) {
         movieIndex = i;
       }
     });
+    console.log(movieIndex)
     userList[movieIndex] = {
       id: userList[movieIndex].id,
-      title: req.body.title || userList[movieIndex].title,
-      year: req.body.year || userList[movieIndex].year,
-      cover: req.body.cover || userList[movieIndex].cover
+      title: req.body.title,
+      year: req.body.year,
+      cover: req.body.cover
     };
     res.send(userList);
   }

@@ -1,57 +1,73 @@
 import React, { Component } from "react";
-import axios from 'axios'
+import axios from "axios";
 // import Movie from '../Movie/Movie'
 
 export default class UserList extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      userList: []
-    }
+      userList: [],
+      editMode: false,
+      title: "",
+      year: "",
+      cover: ""
+    };
   }
 
-
-  componentDidMount() {
-    axios.get('/api/userList').then(res => {
-      this.setState({userList: res.data})
-    })
+  handleEditMode() {
+    this.setState({ editMode: true });
   }
 
-  deleteMovie(id) {
-    axios.delete(`/api/userList/${id}`).then(res => {
-      this.setState({userList: res.data})
-    })
+  handleTitleChange(e) {
+    this.setState({ title: e });
   }
 
-  updateMovie(id, title, year, cover) {
-    axios.put(`/api/userList/${id}`, {title, year, cover}.then(res => {
-      this.setState({userList: res.data})
-    }))
+  handleYearChange(e) {
+    this.setState({ year: e });
   }
 
+  handleCoverChange(e) {
+    this.setState({ cover: e });
+  }
+
+  handleConfirmChange() {
+    let {title, year, cover} = this.state
+    this.props.updateMovieFn(this.props.data.id, title, year, cover)
+    this.setState({editMode: false, title: '', year: '', cover: ''})
+
+  }
 
   render() {
-    let movieList = this.state.userList.map((elem, i) => {
-      console.log(elem)
-      return (
-        <div key={i}>
-          <span>{elem.title}</span>
-          <span>{elem.year}</span>
-          <img src={elem.cover} alt="movie cover" />
-          <button onClick={() => this.deleteMovie(elem.id)}>Delete</button>
-          <button onClick={() => this.updateMovie()}>Update</button>
-        </div>
-      );
-    })
-    // let movie = this.props.userList.map((elem, i) => {
-    //   return (
-    //     <div key={i}>
-    //       <span>{elem.title}</span>
-    //       <span>{elem.year}</span>
-    //       <img src={elem.cover} alt="movie cover" />
-    //     </div>
-    //   );
-    // });
-    return <div>{movieList}</div>;
+    return (
+      <div>
+        <span>{this.props.data.title}</span>
+        <span>{this.props.data.year}</span>
+        <img src={this.props.data.cover} alt="movie cover" />
+        <button onClick={() => this.deleteMovie(this.props.data.id)}>
+          Delete
+        </button>
+        <button onClick={() => this.handleEditMode()}>Update</button>
+        {this.state.editMode ? (
+          <div>
+            <input
+              placeholder="title"
+              onChange={e => this.handleTitleChange(e.target.value)}
+              value={this.state.title}
+            />
+            <input
+              placeholder="year"
+              onChange={e => this.handleYearChange(e.target.value)}
+              value={this.state.year}
+            />
+            <input
+              placeholder="cover"
+              onChange={e => this.handleCoverChange(e.target.value)}
+              value={this.state.cover}
+            />
+            <button onClick={() => this.handleConfirmChange()}>Confirm Changes</button>
+          </div>
+        ) : null}
+      </div>
+    );
   }
 }
