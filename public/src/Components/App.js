@@ -3,8 +3,7 @@ import Search from "./Search/Search";
 import MovieResults from "./MovieResults/MovieResults";
 import axios from 'axios'
 import './App.css'
-
-export default class App extends Component {
+ {
   constructor() {
     super();
     this.state = {
